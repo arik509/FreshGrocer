@@ -1,0 +1,56 @@
+[
+  {
+    "id": "1",
+    "name": "Organic Bananas",
+    "description": "Sweet and creamy organic bananas, perfect for snacking or baking.",
+    "price": 2.99,
+    "category": "Fruits",
+    "image": "https://placehold.co/400x300/fee2e2/1f2937?text=Bananas",
+    "nutrition": "Potassium: 400mg, Calories: 105"
+  },
+  {
+    "id": "2",
+    "name": "Fresh Avocados",
+    "description": "Ripe and ready to eat avocados. Great for toast or guacamole.",
+    "price": 4.99,
+    "category": "Vegetables",
+    "image": "https://placehold.co/400x300/dcfce7/1f2937?text=Avocados",
+    "nutrition": "Healthy Fats: 21g, Fiber: 10g"
+  },
+  {
+    "id": "3",
+    "name": "Artisan Sourdough",
+    "description": "Crusty artisan sourdough bread baked fresh daily.",
+    "price": 5.49,
+    "category": "Bakery",
+    "image": "https://placehold.co/400x300/fef3c7/1f2937?text=Sourdough",
+    "nutrition": "Carbs: 35g, Protein: 8g"
+  },
+  {
+    "id": "4",
+    "name": "Organic Whole Milk",
+    "description": "Creamy whole milk from grass-fed cows.",
+    "price": 3.99,
+    "category": "Dairy",
+    "image": "https://placehold.co/400x300/e0f2fe/1f2937?text=Milk",
+    "nutrition": "Calcium: 30%, Vitamin D: 25%"
+  },
+  {
+    "id": "5",
+    "name": "Red Apples",
+    "description": "Crisp and juicy red apples.",
+    "price": 1.99,
+    "category": "Fruits",
+    "image": "https://placehold.co/400x300/fee2e2/1f2937?text=Apples",
+    "nutrition": "Fiber: 4g, Vitamin C: 14%"
+  },
+  {
+    "id": "6",
+    "name": "Spinach Bunch",
+    "description": "Fresh organic spinach, rich in iron.",
+    "price": 2.49,
+    "category": "Vegetables",
+    "image": "https://placehold.co/400x300/dcfce7/1f2937?text=Spinach",
+    "nutrition": "Iron: 15%, Vitamin A: 50%"
+  }
+]
