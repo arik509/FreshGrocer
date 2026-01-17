@@ -6,34 +6,30 @@ export default function Testimonials() {
   ];
 
   return (
-    <section style={{ padding: '8rem 0 6rem', backgroundColor: 'var(--background)' }}>
-      <div className="container">
-        <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginBottom: '4rem', textAlign: 'center', color: 'var(--text-main)' }}>What Our Customers Say</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem' }}>
+    <section className="py-24 bg-base-100">
+      <div className="container mx-auto px-4">
+        <h2 className="text-4xl font-extrabold text-center mb-16">What Our Customers Say</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {reviews.map((review, i) => (
-            <div key={i} className="animate-slide-up" style={{ 
-              padding: '2.5rem', 
-              border: '1px solid var(--border)', 
-              borderRadius: '1.5rem',
-              backgroundColor: 'white',
-              boxShadow: 'var(--shadow-sm)',
-              animationDelay: `${i * 150}ms`,
-              position: 'relative'
-            }}>
-              <div style={{ position: 'absolute', top: '-1.5rem', left: '2rem', fontSize: '3rem', color: 'var(--primary)', opacity: 0.3, fontFamily: 'serif' }}>"</div>
-              <div style={{ display: 'flex', gap: '0.25rem', marginBottom: '1.5rem' }}>
-                {[...Array(review.rating)].map((_, r) => (
-                  <span key={r} style={{ color: '#fbbf24' }}>⭐</span>
-                ))}
-              </div>
-              <p style={{ fontStyle: 'italic', marginBottom: '2rem', color: 'var(--text-muted)', lineHeight: 1.7, fontSize: '1.1rem' }}>"{review.text}"</p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div style={{ width: '50px', height: '50px', backgroundColor: '#e5e7eb', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: 'var(--text-muted)' }}>
-                    {review.name.charAt(0)}
+            <div key={i} className="card bg-base-100 border border-base-200 shadow-lg hover:shadow-2xl transition-all duration-300">
+              <div className="card-body relative">
+                <div className="absolute top-4 left-6 text-6xl text-primary/10 serif leading-none">"</div>
+                <div className="rating rating-sm mb-4 z-10">
+                  {[...Array(review.rating)].map((_, r) => (
+                    <input key={r} type="radio" name={`rating-${i}`} className="mask mask-star-2 bg-orange-400" disabled checked />
+                  ))}
                 </div>
-                <div>
-                   <h4 style={{ fontWeight: 700, color: 'var(--text-main)' }}>{review.name}</h4>
-                   <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>{review.role}</div>
+                <p className="text-base-content/70 italic mb-6 z-10 leading-relaxed">"{review.text}"</p>
+                <div className="flex items-center gap-4 mt-auto">
+                  <div className="avatar placeholder">
+                    <div className="bg-neutral text-neutral-content rounded-full w-12">
+                      <span className="text-xl font-bold">{review.name.charAt(0)}</span>
+                    </div>
+                  </div>
+                  <div>
+                     <h4 className="font-bold text-base-content">{review.name}</h4>
+                     <div className="text-sm text-base-content/60">{review.role}</div>
+                  </div>
                 </div>
               </div>
             </div>

@@ -3,74 +3,30 @@
 import Link from 'next/link';
 
 export default function ProductCard({ product }) {
+  const imageEmoji = product.image.replace(/https.*text=/, '').replace(/[^\w\s]/gi, '') || '📦';
+  const hasImage = product.image.includes('http') && !product.image.includes('placehold');
+
   return (
-    <div className="animate-slide-up" style={{ 
-      borderRadius: '1.5rem', 
-      overflow: 'hidden',
-      backgroundColor: 'white',
-      transition: 'all 0.4s ease',
-      border: '1px solid var(--border)',
-      position: 'relative',
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%'
-    }}
-    onMouseEnter={(e) => {
-      e.currentTarget.style.transform = 'translateY(-8px)';
-      e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
-    }}
-    onMouseLeave={(e) => {
-      e.currentTarget.style.transform = 'translateY(0)';
-      e.currentTarget.style.boxShadow = 'none';
-    }}
-    >
-      <div style={{ 
-        position: 'relative',
-        height: '240px', 
-        backgroundColor: '#f9fafb', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        fontSize: '4rem',
-        overflow: 'hidden'
-      }}>
-        {product.image.includes('http') && !product.image.includes('placehold') ? (
-           <img src={product.image} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+    <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-base-200">
+      <figure className="h-48 bg-base-200 flex items-center justify-center text-6xl overflow-hidden relative group">
+        {hasImage ? (
+           <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
         ) : (
-           <span style={{ transition: 'transform 0.5s' }} className="product-emoji">{product.image.replace(/https.*text=/, '').replace(/[^\w\s]/gi, '') || '📦'}</span> 
+           <span className="group-hover:scale-110 transition-transform duration-300">{imageEmoji}</span> 
         )}
-        
-        <button style={{
-          position: 'absolute',
-          bottom: '1rem',
-          right: '1rem',
-          backgroundColor: 'white',
-          borderRadius: '50%',
-          width: '40px',
-          height: '40px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          border: 'none',
-          boxShadow: 'var(--shadow-md)',
-          cursor: 'pointer',
-          color: 'var(--primary)',
-          fontSize: '1.25rem'
-        }}>
-          +
+        <button className="btn btn-circle btn-primary absolute bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" /></svg>
         </button>
-      </div>
-      
-      <div style={{ padding: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
-        <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--primary)', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-          {product.category}
+      </figure>
+      <div className="card-body p-6">
+        <div className="badge badge-outline text-xs font-bold uppercase tracking-wider mb-2">{product.category}</div>
+        <h2 className="card-title text-xl mb-1">{product.name}</h2>
+        <p className="text-2xl font-bold text-primary">${product.price.toFixed(2)}</p>
+        <div className="card-actions justify-end mt-4">
+          <Link href={`/products/${product.id}`} className="btn btn-primary btn-block">
+            View Details
+          </Link>
         </div>
-        <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text-main)' }}>{product.name}</h3>
-        <p style={{ fontWeight: 800, color: 'var(--text-main)', fontSize: '1.25rem', marginBottom: '1.5rem' }}>${product.price.toFixed(2)}</p>
-        
-        <Link href={`/products/${product.id}`} className="btn btn-primary" style={{ textAlign: 'center', marginTop: 'auto', width: '100%' }}>
-          View Details
-        </Link>
       </div>
     </div>
   );

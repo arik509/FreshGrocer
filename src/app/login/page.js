@@ -33,78 +33,54 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      minHeight: '80vh',
-      backgroundColor: '#f9fafb'
-    }}>
-      <div style={{
-        backgroundColor: 'white',
-        padding: '2.5rem',
-        borderRadius: '1rem',
-        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-        width: '100%',
-        maxWidth: '400px'
-      }}>
-        <h1 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '1.5rem', textAlign: 'center' }}>Welcome Back</h1>
-        
-        {error && (
-          <div style={{
-            backgroundColor: '#fee2e2',
-            color: '#991b1b',
-            padding: '0.75rem',
-            borderRadius: '0.5rem',
-            marginBottom: '1rem',
-            fontSize: '0.875rem'
-          }}>
-            {error}
-          </div>
-        )}
+    <div className="min-h-[80vh] flex items-center justify-center bg-base-200 px-4">
+      <div className="card w-full max-w-sm bg-base-100 shadow-2xl">
+        <div className="card-body">
+          <h1 className="text-2xl font-bold text-center mb-6">Welcome Back</h1>
+          
+          {error && (
+            <div className="alert alert-error mb-4 text-sm py-2">
+              <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-4 w-4" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <span>{error}</span>
+            </div>
+          )}
 
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: '1rem' }}>
-            <label htmlFor="email" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}>Email</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              style={{
-                width: '100%',
-                padding: '0.75rem',
-                borderRadius: '0.5rem',
-                border: '1px solid #d1d5db',
-                outline: 'none'
-              }}
-            />
-          </div>
-          <div style={{ marginBottom: '1.5rem' }}>
-            <label htmlFor="password" style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}>Password</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              style={{
-                width: '100%',
-                padding: '0.75rem',
-                borderRadius: '0.5rem',
-                border: '1px solid #d1d5db',
-                outline: 'none'
-              }}
-            />
-          </div>
-          <button type="submit" className="btn btn-primary" style={{ width: '100%' }}>
-            Sign In
-          </button>
-        </form>
-        <p style={{ marginTop: '1.5rem', textAlign: 'center', fontSize: '0.875rem', color: '#6b7280' }}>
-          Mock Credentials: user@freshgrocer.com / grocery123
-        </p>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                type="email"
+                placeholder="email@example.com"
+                className="input input-bordered"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Password</span>
+              </label>
+              <input
+                type="password"
+                placeholder="********"
+                className="input input-bordered"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-control mt-6">
+              <button type="submit" className="btn btn-primary">Sign In</button>
+            </div>
+          </form>
+          <div className="divider text-xs text-base-content/50">Demo Credentials</div>
+          <p className="text-center text-xs text-base-content/70">
+            user@freshgrocer.com / grocery123
+          </p>
+        </div>
       </div>
     </div>
   );

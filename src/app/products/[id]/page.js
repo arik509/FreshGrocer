@@ -10,58 +10,51 @@ async function getProduct(id) {
 }
 
 export default async function ProductDetailsPage({ params }) {
-  const { id } = await params; // Await params in Next.js 15
+  const { id } = await params;
   const product = await getProduct(id);
 
   if (!product) {
     return (
-      <div className="container" style={{ padding: '4rem 1rem', textAlign: 'center' }}>
-        <h1 style={{ fontSize: '2rem' }}>Product Not Found</h1>
-        <Link href="/products" className="btn btn-primary" style={{ marginTop: '1rem' }}>Back to Products</Link>
+      <div className="container mx-auto px-4 py-24 text-center">
+        <h1 className="text-4xl font-bold mb-4">Product Not Found</h1>
+        <Link href="/products" className="btn btn-primary">Back to Products</Link>
       </div>
     );
   }
 
+  const imageEmoji = product.image.replace(/https.*text=/, '').replace(/[^\w\s]/gi, '') || '📦';
+  const hasImage = product.image.includes('http') && !product.image.includes('placehold');
+
   return (
-    <div className="container" style={{ padding: '4rem 1rem' }}>
-      <Link href="/products" style={{ display: 'inline-block', marginBottom: '2rem', color: 'var(--text-muted)' }}>
+    <div className="container mx-auto px-4 py-16">
+      <Link href="/products" className="btn btn-ghost btn-sm mb-8 gap-2">
         &larr; Back to Products
       </Link>
       
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem' }}>
-        <div style={{ backgroundColor: '#f3f4f6', borderRadius: '1rem', minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '5rem' }}>
-           {product.image.includes('http') && !product.image.includes('placehold') ? (
-              <img src={product.image} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '1rem' }} />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24">
+        <div className="bg-base-200 rounded-3xl min-h-[400px] flex items-center justify-center text-9xl overflow-hidden shadow-inner">
+           {hasImage ? (
+              <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
            ) : (
-              <span>📦</span>
+              <span>{imageEmoji}</span>
            )}
         </div>
         
-        <div>
-          <span style={{ 
-            backgroundColor: 'var(--primary)', 
-            color: 'white', 
-            padding: '0.25rem 0.75rem', 
-            borderRadius: '1rem', 
-            fontSize: '0.875rem',
-            marginBottom: '1rem',
-            display: 'inline-block'
-          }}>
-            {product.category}
-          </span>
-          <h1 style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--text-main)' }}>{product.name}</h1>
-          <p style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--primary)', marginBottom: '2rem' }}>${product.price ? product.price.toFixed(2) : '0.00'}</p>
+        <div className="flex flex-col justify-center">
+          <div className="badge badge-primary badge-lg mb-4">{product.category}</div>
+          <h1 className="text-5xl font-bold mb-4 text-base-content">{product.name}</h1>
+          <p className="text-4xl font-bold text-primary mb-8">${product.price ? product.price.toFixed(2) : '0.00'}</p>
           
-          <p style={{ lineHeight: 1.8, marginBottom: '2rem', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
+          <p className="text-lg leading-relaxed text-base-content/80 mb-8">
             {product.description}
           </p>
           
-          <div style={{ marginBottom: '2rem', padding: '1.5rem', backgroundColor: '#f9fafb', borderRadius: '0.75rem' }}>
-            <h3 style={{ fontWeight: 600, marginBottom: '0.5rem' }}>Nutritional Facts</h3>
-            <p style={{ color: 'var(--text-muted)' }}>{product.nutrition}</p>
+          <div className="bg-base-200 p-6 rounded-2xl mb-8">
+            <h3 className="font-bold mb-2">Nutritional Facts</h3>
+            <p className="text-base-content/70">{product.nutrition}</p>
           </div>
 
-          <button className="btn btn-primary" style={{ padding: '1rem 3rem', fontSize: '1.1rem' }}>
+          <button className="btn btn-primary btn-lg w-full md:w-auto shadow-xl shadow-primary/20">
             Add to Cart
           </button>
         </div>

@@ -11,60 +11,31 @@ const products = [
 
 export default function FeaturedProducts() {
   return (
-    <section style={{ padding: '6rem 0', backgroundColor: '#fafafa' }}>
-      <div className="container">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', marginBottom: '3rem' }}>
+    <section className="py-24 bg-base-200">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-end mb-12">
           <div>
-             <span style={{ color: 'var(--primary)', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: '0.875rem' }}>Trending</span>
-             <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginTop: '0.5rem', color: 'var(--text-main)' }}>Popular this Week</h2>
+             <span className="text-primary font-bold tracking-widest uppercase text-sm">Trending</span>
+             <h2 className="text-4xl font-extrabold mt-2 text-base-content">Popular this Week</h2>
           </div>
-          <Link href="/products" style={{ color: 'var(--primary)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            View All <span style={{ fontSize: '1.2rem' }}>&rarr;</span>
+          <Link href="/products" className="btn btn-primary btn-outline gap-2 group">
+            View All <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
           </Link>
         </div>
         
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', 
-          gap: '2.5rem' 
-        }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {products.map((product, index) => (
-            <div key={product.id} className="animate-slide-up" style={{ 
-              backgroundColor: 'white', 
-              borderRadius: '1.5rem', 
-              padding: '1.5rem',
-              boxShadow: 'var(--shadow-sm)',
-              textAlign: 'center',
-              border: '1px solid var(--border)',
-              transition: 'all 0.3s ease',
-              animationDelay: `${index * 100}ms`
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-8px)';
-              e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
-            }}
-             onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
-            }}
-            >
-              <div style={{ 
-                fontSize: '5rem', 
-                marginBottom: '1.5rem', 
-                background: '#f9fafb', 
-                borderRadius: '1rem', 
-                padding: '2rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                <span className="product-emoji" style={{ transition: 'transform 0.3s' }}>{product.image}</span>
+            <div key={product.id} className="card bg-base-100 shadow-xl border border-base-200 hover:-translate-y-2 transition-transform duration-300">
+              <figure className="px-10 pt-10 text-8xl bg-base-200/50 h-48 flex items-center justify-center">
+                <span className="hover:scale-125 transition-transform duration-300 cursor-pointer">{product.image}</span>
+              </figure>
+              <div className="card-body items-center text-center">
+                <h3 className="card-title">{product.name}</h3>
+                <p className="text-2xl font-bold text-primary">${product.price}</p>
+                <div className="card-actions w-full mt-4">
+                  <button className="btn btn-primary w-full shadow-lg shadow-primary/30">Add to Cart</button>
+                </div>
               </div>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text-main)' }}>{product.name}</h3>
-              <p style={{ color: 'var(--primary)', fontWeight: 800, fontSize: '1.5rem', marginBottom: '1.5rem' }}>${product.price}</p>
-              <button className="btn btn-primary" style={{ width: '100%' }}>
-                Add to Cart
-              </button>
             </div>
           ))}
         </div>

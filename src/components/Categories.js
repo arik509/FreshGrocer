@@ -3,63 +3,32 @@
 import Link from 'next/link';
 
 const categories = [
-  { name: 'Fruits', emoji: '🍎', color: '#fee2e2' },
-  { name: 'Vegetables', emoji: '🥦', color: '#dcfce7' },
-  { name: 'Dairy & Eggs', emoji: '🥛', color: '#e0f2fe' },
-  { name: 'Bakery', emoji: '🍞', color: '#fef3c7' },
+  { name: 'Fruits', emoji: '🍎', color: 'bg-red-50 hover:border-red-200' },
+  { name: 'Vegetables', emoji: '🥦', color: 'bg-green-50 hover:border-green-200' },
+  { name: 'Dairy & Eggs', emoji: '🥛', color: 'bg-blue-50 hover:border-blue-200' },
+  { name: 'Bakery', emoji: '🍞', color: 'bg-yellow-50 hover:border-yellow-200' },
 ];
 
 export default function Categories() {
   return (
-    <section style={{ padding: '6rem 0' }}>
-      <div className="container">
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <span style={{ color: 'var(--primary)', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: '0.875rem' }}>Categories</span>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginTop: '0.5rem', color: 'var(--text-main)' }}>Shop by Category</h2>
+    <section className="py-24">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <span className="text-primary font-bold tracking-widest uppercase text-sm">Categories</span>
+          <h2 className="text-4xl font-extrabold mt-2 text-base-content">Shop by Category</h2>
         </div>
         
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-          gap: '2rem' 
-        }}>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {categories.map((cat, index) => (
-            <Link href={`/products?category=${cat.name}`} key={cat.name} className="animate-slide-up" style={{
-              backgroundColor: 'white',
-              padding: '2.5rem',
-              borderRadius: '1.5rem',
-              textAlign: 'center',
-              textDecoration: 'none',
-              display: 'block',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-              boxShadow: 'var(--shadow-sm)',
-              border: '1px solid transparent',
-              animationDelay: `${index * 100}ms`
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-5px)';
-              e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-              e.currentTarget.style.borderColor = 'var(--primary)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
-              e.currentTarget.style.borderColor = 'transparent';
-            }}
+            <Link href={`/products?category=${cat.name}`} key={cat.name} 
+              className={`card ${cat.color} border border-transparent hover:shadow-lg transition-all duration-300 hover:-translate-y-1 block`}
             >
-                <div style={{ 
-                  fontSize: '3.5rem', 
-                  marginBottom: '1.5rem', 
-                  backgroundColor: cat.color,
-                  width: '100px',
-                  height: '100px',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: '0 auto 1.5rem'
-                }}>{cat.emoji}</div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--text-main)' }}>{cat.name}</h3>
+              <div className="card-body items-center text-center p-8">
+                <div className="text-6xl mb-4 p-4 bg-white/50 rounded-full w-24 h-24 flex items-center justify-center">
+                  {cat.emoji}
+                </div>
+                <h3 className="card-title text-xl font-bold">{cat.name}</h3>
+              </div>
             </Link>
           ))}
         </div>

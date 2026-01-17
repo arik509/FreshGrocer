@@ -4,68 +4,29 @@ import Link from 'next/link';
 
 export default function Navbar() {
   return (
-    <nav className="glass" style={{ 
-      position: 'sticky',
-      top: 0,
-      zIndex: 100,
-      transition: 'all 0.3s ease'
-    }}>
-      <div className="container" style={{ 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'center', 
-        height: '80px' 
-      }}>
-        <Link href="/" style={{ 
-          fontSize: '1.75rem', 
-          fontWeight: 800, 
-          color: 'var(--text-main)',
-          letterSpacing: '-0.02em',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.5rem'
-        }}>
-          <span style={{ color: 'var(--primary)' }}>Fresh</span>Grocer
+    <div className="navbar bg-base-100 shadow-sm sticky top-0 z-50">
+      <div className="flex-1">
+        <Link href="/" className="btn btn-ghost text-xl font-bold tracking-tighter">
+          <span className="text-primary">Fresh</span>Grocer
         </Link>
-        
-        <div style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }}>
-          <Link href="/" className="hover-text" style={{ fontWeight: 500, color: 'var(--text-muted)' }}>Home</Link>
-          <Link href="/products" className="hover-text" style={{ fontWeight: 500, color: 'var(--text-muted)' }}>Products</Link>
-          <Link href="/login" style={{ fontWeight: 500, color: 'var(--text-muted)' }}>Login</Link>
-          
-          <div style={{ 
-            position: 'relative', 
-            cursor: 'pointer', 
-            width: '40px', 
-            height: '40px', 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center',
-            backgroundColor: 'var(--primary-light)',
-            borderRadius: '50%',
-            color: 'var(--primary)',
-            transition: 'transform 0.2s'
-          }} className="btn-icon">
-            <span role="img" aria-label="cart" style={{ fontSize: '1.2rem' }}>🛒</span>
-            <span style={{
-              position: 'absolute',
-              top: '-2px',
-              right: '-2px',
-              backgroundColor: 'var(--accent)',
-              color: 'white',
-              borderRadius: '50%',
-              width: '18px',
-              height: '18px',
-              fontSize: '10px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontWeight: 'bold',
-              border: '2px solid white'
-            }}>0</span>
+      </div>
+      <div className="flex-none gap-2">
+        <ul className="menu menu-horizontal px-1 gap-1 hidden sm:flex">
+          <li><Link href="/">Home</Link></li>
+          <li><Link href="/products">Products</Link></li>
+          <li><Link href="/login">Login</Link></li>
+        </ul>
+        <div className="dropdown dropdown-end">
+          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
+            <div className="indicator">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <span className="badge badge-sm badge-accent indicator-item">0</span>
+            </div>
           </div>
         </div>
       </div>
-    </nav>
+    </div>
   );
 }

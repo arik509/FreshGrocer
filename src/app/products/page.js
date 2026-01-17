@@ -16,20 +16,16 @@ export default async function ProductsPage() {
   const products = await getProducts();
 
   return (
-    <div className="container" style={{ padding: '4rem 1rem' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 700, color: 'var(--text-main)' }}>All Products</h1>
+    <div className="container mx-auto px-4 py-16">
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-4xl font-bold text-base-content">All Products</h1>
          {/* Link to hidden add-product page for demo */}
-         <Link href="/add-product" className="btn btn-accent">
+         <Link href="/add-product" className="btn btn-accent btn-sm sm:btn-md">
             Add Product
          </Link>
       </div>
 
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
-        gap: '2rem' 
-      }}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

@@ -13,11 +13,11 @@ import Footer from "@/components/Footer";
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="emerald">
       <body className={inter.className}>
-        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <div className="flex flex-col min-h-screen">
           <Navbar />
-          <main style={{ flex: 1 }}>{children}</main>
+          <main className="flex-1">{children}</main>
           <Footer />
         </div>
       </body>

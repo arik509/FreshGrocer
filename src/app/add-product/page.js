@@ -48,92 +48,106 @@ export default function AddProductPage() {
   };
 
   return (
-    <div className="container" style={{ padding: '4rem 1rem', maxWidth: '600px' }}>
-      <h1 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '2rem', textAlign: 'center' }}>Add New Product</h1>
+    <div className="container mx-auto px-4 py-16 max-w-2xl">
+      <div className="card bg-base-100 shadow-xl border border-base-200">
+        <div className="card-body">
+          <h1 className="text-3xl font-bold text-center mb-8">Add New Product</h1>
 
-      {status.message && (
-        <div style={{
-          padding: '1rem',
-          borderRadius: '0.5rem',
-          marginBottom: '1.5rem',
-          backgroundColor: status.type === 'success' ? '#dcfce7' : status.type === 'error' ? '#fee2e2' : '#e0f2fe',
-          color: status.type === 'success' ? '#166534' : status.type === 'error' ? '#991b1b' : '#075985',
-          textAlign: 'center'
-        }}>
-          {status.message}
+          {status.message && (
+            <div className={`alert ${status.type === 'success' ? 'alert-success' : status.type === 'error' ? 'alert-error' : 'alert-info'} mb-6`}>
+              <span>{status.message}</span>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-bold">Product Name</span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="e.g. Organic Bananas"
+                className="input input-bordered"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-control">
+               <label className="label">
+                 <span className="label-text font-bold">Category</span>
+               </label>
+               <select 
+                 name="category" 
+                 className="select select-bordered"
+                 value={formData.category} 
+                 onChange={handleChange}
+               >
+                 <option value="">Select Category</option>
+                 <option value="Fruits">Fruits</option>
+                 <option value="Vegetables">Vegetables</option>
+                 <option value="Dairy">Dairy</option>
+                 <option value="Bakery">Bakery</option>
+                 <option value="Other">Other</option>
+               </select>
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-bold">Price</span>
+              </label>
+              <label className="input-group">
+                <span className="bg-base-200 px-4 flex items-center border border-r-0 border-base-300 rounded-l-lg">$</span>
+                <input
+                  type="number"
+                  name="price"
+                  placeholder="0.00"
+                  className="input input-bordered w-full"
+                  value={formData.price}
+                  onChange={handleChange}
+                  required
+                  step="0.01"
+                />
+              </label>
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-bold">Image URL</span>
+              </label>
+              <input
+                type="text"
+                name="image"
+                placeholder="https://..."
+                className="input input-bordered"
+                value={formData.image}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text font-bold">Description</span>
+              </label>
+              <textarea
+                name="description"
+                className="textarea textarea-bordered h-24"
+                placeholder="Product description..."
+                value={formData.description}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-control mt-6">
+              <button type="submit" className="btn btn-primary" disabled={status.type === 'loading'}>
+                {status.type === 'loading' ? <span className="loading loading-spinner"></span> : 'Add Product'}
+              </button>
+            </div>
+          </form>
         </div>
-      )}
-
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-        <div>
-          <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}>Product Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db' }}
-          />
-        </div>
-
-        <div>
-           <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}>Category</label>
-           <select 
-             name="category" 
-             value={formData.category} 
-             onChange={handleChange}
-             style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db' }}
-           >
-             <option value="">Select Category</option>
-             <option value="Fruits">Fruits</option>
-             <option value="Vegetables">Vegetables</option>
-             <option value="Dairy">Dairy</option>
-             <option value="Bakery">Bakery</option>
-             <option value="Other">Other</option>
-           </select>
-        </div>
-
-        <div>
-          <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}>Price</label>
-          <input
-            type="number"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-            required
-            step="0.01"
-            style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db' }}
-          />
-        </div>
-
-        <div>
-          <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}>Image URL</label>
-          <input
-            type="text"
-            name="image"
-            value={formData.image}
-            onChange={handleChange}
-            placeholder="https://..."
-            style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db' }}
-          />
-        </div>
-
-        <div>
-          <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 500 }}>Description</label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            rows="4"
-            style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #d1d5db', fontFamily: 'inherit' }}
-          />
-        </div>
-
-        <button type="submit" className="btn btn-primary" disabled={status.type === 'loading'}>
-          {status.type === 'loading' ? 'Adding...' : 'Add Product'}
-        </button>
-      </form>
+      </div>
     </div>
   );
 }
