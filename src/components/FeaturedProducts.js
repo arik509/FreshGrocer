@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 
 const products = [
@@ -9,32 +11,58 @@ const products = [
 
 export default function FeaturedProducts() {
   return (
-    <section style={{ padding: '4rem 0', backgroundColor: '#fafafa' }}>
+    <section style={{ padding: '6rem 0', backgroundColor: '#fafafa' }}>
       <div className="container">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--text-main)' }}>Popular this Week</h2>
-          <Link href="/products" style={{ color: 'var(--primary)', fontWeight: 600 }}>View All &rarr;</Link>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', marginBottom: '3rem' }}>
+          <div>
+             <span style={{ color: 'var(--primary)', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: '0.875rem' }}>Trending</span>
+             <h2 style={{ fontSize: '2.5rem', fontWeight: 800, marginTop: '0.5rem', color: 'var(--text-main)' }}>Popular this Week</h2>
+          </div>
+          <Link href="/products" style={{ color: 'var(--primary)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            View All <span style={{ fontSize: '1.2rem' }}>&rarr;</span>
+          </Link>
         </div>
         
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
-          gap: '2rem' 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', 
+          gap: '2.5rem' 
         }}>
-          {products.map((product) => (
-            <div key={product.id} style={{ 
+          {products.map((product, index) => (
+            <div key={product.id} className="animate-slide-up" style={{ 
               backgroundColor: 'white', 
-              borderRadius: '0.75rem', 
+              borderRadius: '1.5rem', 
               padding: '1.5rem',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-              textAlign: 'center'
-            }}>
-              <div style={{ fontSize: '4rem', marginBottom: '1rem', background: '#f3f4f6', borderRadius: '0.5rem', padding: '1rem' }}>
-                {product.image}
+              boxShadow: 'var(--shadow-sm)',
+              textAlign: 'center',
+              border: '1px solid var(--border)',
+              transition: 'all 0.3s ease',
+              animationDelay: `${index * 100}ms`
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-8px)';
+              e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
+            }}
+             onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
+            }}
+            >
+              <div style={{ 
+                fontSize: '5rem', 
+                marginBottom: '1.5rem', 
+                background: '#f9fafb', 
+                borderRadius: '1rem', 
+                padding: '2rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <span className="product-emoji" style={{ transition: 'transform 0.3s' }}>{product.image}</span>
               </div>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '0.5rem' }}>{product.name}</h3>
-              <p style={{ color: 'var(--primary)', fontWeight: 700, fontSize: '1.2rem', marginBottom: '1rem' }}>${product.price}</p>
-              <button className="btn btn-primary" style={{ width: '100%', padding: '0.5rem' }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text-main)' }}>{product.name}</h3>
+              <p style={{ color: 'var(--primary)', fontWeight: 800, fontSize: '1.5rem', marginBottom: '1.5rem' }}>${product.price}</p>
+              <button className="btn btn-primary" style={{ width: '100%' }}>
                 Add to Cart
               </button>
             </div>
